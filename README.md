@@ -1,4 +1,4 @@
-# SeqMaker
+# SeqMaker (under development)
 
 [![Build Status](https://travis-ci.org/sfchen/SeqMaker.jl.svg?branch=master)](https://travis-ci.org/sfchen/SeqMaker.jl)
 
