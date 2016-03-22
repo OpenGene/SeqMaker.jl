@@ -1,0 +1,25 @@
+{
+    "depth":100,
+    "assembly":"hg19",
+    "dnalen":{
+        "min":50,
+        "max":250
+    },
+    "fusion":[
+        {
+            "name":"ALK-intron19-EML4-intron13",
+            "left":"-2:29447873",
+            "right":"+2:42526793",
+            "depth":10
+        }
+    ],
+    "snv":[
+        {
+            "name":"EGFR-L858R",
+            "pos":"7:55259515",
+            "ref":"T",
+            "alt":"G",
+            "depth":30
+        }
+    ]
+}
