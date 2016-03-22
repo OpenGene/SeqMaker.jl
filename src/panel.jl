@@ -1,4 +1,3 @@
-export load_bed
 function load_bed(bed_file::AbstractString)
     io = open(bed_file)
     bed_file = readall(io)
