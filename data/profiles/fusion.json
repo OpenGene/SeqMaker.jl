@@ -1,9 +1,21 @@
 {
-    "depth":100,
-    "assembly":"hg19",
-    "dnalen":{
-        "min":50,
-        "max":250
+    "config":{
+        "depth":100,
+        "pair-end":true,
+        "assembly":"hg19",
+        "seq_error_rate":0.001,
+        "template_len":{
+            "min":100,
+            "max":200
+        },
+        "normal_base_qual":{
+            "min":24,
+            "max":37
+        },
+        "seq_error_qual":{
+            "min":8,
+            "max":20
+        }
     },
     "fusion":[
         {
