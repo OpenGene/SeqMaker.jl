@@ -12,6 +12,6 @@ include("snv.jl")
 include("maker.jl")
 
 # test
-# make_seq("data/panels/lung_cancer_hg19.bed", "data/profiles/fusion.json", "output")
+make_seq("data/panels/lung_cancer_hg19.bed", "data/profiles/fusion.json", "output")
 
 end # module
