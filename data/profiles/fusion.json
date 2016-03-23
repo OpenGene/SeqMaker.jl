@@ -28,7 +28,8 @@
     "snv":[
         {
             "name":"EGFR-L858R",
-            "pos":"7:55259515",
+            "chrom":"chr7",
+            "pos":55259515,
             "ref":"T",
             "alt":"G",
             "rate":0.3

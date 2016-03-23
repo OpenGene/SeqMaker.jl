@@ -23,7 +23,7 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         temp_len = Int(floor(rand_temp_len[i] * temp_min + (1.0-rand_temp_len[i]) * temp_max))
         chr, pos_in_chr = seek_in_panel(panel, panel_pos)
         seq, start = sample(assembly, chr, pos_in_chr, temp_len)
-        println(seq)
+        seq = simulate_snv(seq, chr, start, profile["snv"])
     end
 end
 
