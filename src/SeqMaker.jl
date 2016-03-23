@@ -9,6 +9,7 @@ using OpenGene.Reference
 include("panel.jl")
 include("sample.jl")
 include("snv.jl")
+include("sequencing.jl")
 include("maker.jl")
 
 # test

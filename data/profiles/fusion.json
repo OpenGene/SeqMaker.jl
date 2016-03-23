@@ -2,6 +2,7 @@
     "config":{
         "depth":100,
         "pair-end":true,
+        "readlen":151,
         "assembly":"hg19",
         "seq_error_rate":0.001,
         "template_len":{

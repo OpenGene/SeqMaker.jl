@@ -24,6 +24,10 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         chr, pos_in_chr = seek_in_panel(panel, panel_pos)
         seq, start = sample(assembly, chr, pos_in_chr, temp_len)
         seq = simulate_snv(seq, chr, start, profile["snv"])
+        # simulate watson/crick strand
+        if rand()> 0.5
+            seq = ~seq
+        end
     end
 end
 
