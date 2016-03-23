@@ -4,16 +4,27 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
     if !isdir(output_folder)
         mkpath(output_folder)
     end
+
     config = profile["config"]
-    temp_len_mean = (config["template_len"]["max"] + config["template_len"]["min"])/2
+
+    # load assembly
+    assembly = load_assembly(config["assembly"])
+
+    temp_max = config["template_len"]["max"]
+    temp_min = config["template_len"]["min"]
+    temp_len_mean = ( temp_min + temp_max )/2
     read_num = (config["depth"] * panel_size) / temp_len_mean
     read_num = Int(floor(read_num))
     rand_pos = rand(read_num)
-    for pos in rand_pos
-        panel_pos = Int(floor(pos * panel_size))
+    rand_temp_len = rand(read_num)
+    for i in 1:length(rand_pos)
+        panel_pos = Int(floor(rand_pos[i] * panel_size))
+        # linear interpolation
+        temp_len = Int(floor(rand_temp_len[i] * temp_min + (1.0-rand_temp_len[i]) * temp_max))
         chr, pos_in_chr = seek_in_panel(panel, panel_pos)
+        seq, start = sample(assembly, chr, pos_in_chr, temp_len)
+        println(seq)
     end
-    #assembly = load_assembly(config["assembly"])
 end
 
 function seek_in_panel(panel, panel_pos)

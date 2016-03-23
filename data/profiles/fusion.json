@@ -5,7 +5,7 @@
         "assembly":"hg19",
         "seq_error_rate":0.001,
         "template_len":{
-            "min":100,
+            "min":140,
             "max":200
         },
         "normal_base_qual":{
