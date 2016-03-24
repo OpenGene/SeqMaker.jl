@@ -10,7 +10,9 @@ function pair_end_seq(dna_template, config)
     r1name, r2name = name_simulation(true)
     read1 = FastqRead(r1name, r1seq, "+", r1qual)
     read2 = FastqRead(r2name, r2seq, "+", r2qual)
-    return FastqPair(read1, read2)
+    pair = FastqPair(read1, read2)
+    println(pair)
+    return pair
 end
 
 function name_simulation(pairend)
@@ -45,8 +47,8 @@ function sequence_simulation(dna_template, config)
     rand_qual = rand(readlen)
     min_qual = config["normal_base_qual"]["min"]
     max_qual = config["normal_base_qual"]["max"]
-    quals = Int(round(rand_qual * min_qual + (1.0 - rand_qual) * max_qual))
-    qual_arr = [Char(q+33) for q in quals]
+    quals = round(rand_qual * min_qual + (1.0 - rand_qual) * max_qual)
+    qual_arr = [Char(Int(q)+33) for q in quals]
     if !has_error
         sequence = Sequence(ASCIIString(seq_arr))
         quality = Quality(ASCIIString(qual_arr))
@@ -107,12 +109,12 @@ function get_other_base(base)
     if !haskey(others, uppercase(base))
         return 'N'
     end
-    rnd = Int(round(rand() * 3))
+    rnd = Int(round(rand() * 2)) + 1
     return others[uppercase(base)][rnd]
 end
 
 function get_rand_base()
     const bases = ['A', 'T', 'C', 'G']
-    rnd = Int(round(rand() * 4))
+    rnd = Int(round(rand() * 3)) + 1
     return bases[rnd]
 end

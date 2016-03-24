@@ -10,7 +10,7 @@
             "max":200
         },
         "normal_base_qual":{
-            "min":24,
+            "min":30,
             "max":37
         },
         "seq_error_qual":{

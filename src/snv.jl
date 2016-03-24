@@ -1,5 +1,5 @@
 function simulate_snv(seq, chr, start, profile_snv)
-    seqstr = seq.seq
+    seqstr = uppercase(seq.seq)
     for snv in profile_snv
         if chr == snv["chrom"] && start <= snv["pos"] && start+length(seqstr) > snv["pos"]
             seqstr = mutate(seqstr, start, snv)

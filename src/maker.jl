@@ -28,6 +28,7 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         if rand()> 0.5
             seq = ~seq
         end
+        pair = pair_end_seq(seq, config)
     end
 end
 
