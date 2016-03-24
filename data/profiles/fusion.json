@@ -1,6 +1,6 @@
 {
     "config":{
-        "depth":10,
+        "depth":300,
         "pair-end":true,
         "readlen":151,
         "assembly":"hg19",
