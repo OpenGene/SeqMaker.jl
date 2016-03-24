@@ -11,14 +11,13 @@ function pair_end_seq(dna_template, config)
     read1 = FastqRead(r1name, r1seq, "+", r1qual)
     read2 = FastqRead(r2name, r2seq, "+", r2qual)
     pair = FastqPair(read1, read2)
-    println(pair)
     return pair
 end
 
 function name_simulation(pairend)
     const device = "SEQMAKER"
     const run = 1
-    const chip = "V1"
+    const chip = SEQMAKER_VERSION
     const barcode = "ATCGATCG"
     lane = Int(round(rand() * 3)) + 1
     tile = Int(round(rand() * 99)) + 1
@@ -50,7 +49,7 @@ function sequence_simulation(dna_template, config)
     quals = round(rand_qual * min_qual + (1.0 - rand_qual) * max_qual)
     qual_arr = [Char(Int(q)+33) for q in quals]
     if !has_error
-        sequence = Sequence(ASCIIString(seq_arr))
+        sequence = Sequence(ASCIIString(seq_arr[1:readlen]))
         quality = Quality(ASCIIString(qual_arr))
         return sequence, quality
     else

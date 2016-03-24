@@ -7,6 +7,17 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
 
     config = profile["config"]
 
+    io = nothing
+    filename = joinpath(output_folder, "SEQMAKER-$SEQMAKER_VERSION")
+    filename *= "-" * basename(panel_file)
+    filename *= "-" * basename(profile_file)
+
+    if config["pair-end"]
+        io = fastq_open_pair("$filename.R1.fq", "$filename.R2.fq", "w")
+    else
+        io = fastq_open("$filename.R1.fq", "w")
+    end
+
     # load assembly
     assembly = load_assembly(config["assembly"])
 
@@ -28,8 +39,12 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         if rand()> 0.5
             seq = ~seq
         end
-        pair = pair_end_seq(seq, config)
+        if config["pair-end"]
+            pair = pair_end_seq(seq, config)
+            fastq_write_pair(io, pair)
+        end
     end
+    close(io)
 end
 
 function seek_in_panel(panel, panel_pos)

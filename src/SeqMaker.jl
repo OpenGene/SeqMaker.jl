@@ -4,6 +4,8 @@ using JSON
 using OpenGene
 using OpenGene.Reference
 
+const SEQMAKER_VERSION = "V1"
+
 # package code goes here
 
 include("panel.jl")
