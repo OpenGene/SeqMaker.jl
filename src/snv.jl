@@ -3,6 +3,7 @@ function simulate_snv(seq, chr, start, profile_snv)
     for snv in profile_snv
         if chr == snv["chrom"] && start <= snv["pos"] && start+length(seqstr) > snv["pos"]
             seqstr = mutate(seqstr, start, snv)
+            println(seqstr)
         end
     end
     return dna(seqstr)

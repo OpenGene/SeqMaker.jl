@@ -1,6 +1,6 @@
 {
     "config":{
-        "depth":0.1,
+        "depth":10,
         "pair-end":true,
         "readlen":151,
         "assembly":"hg19",
@@ -28,12 +28,36 @@
     ],
     "snv":[
         {
-            "name":"EGFR-L858R",
+            "name":"EGFR-L861Q",
             "chrom":"chr7",
-            "pos":55259515,
+            "pos":55259524,
             "ref":"T",
-            "alt":"G",
-            "rate":0.3
+            "alt":"A",
+            "rate":0.2
+        },
+        {
+            "name":"KRAS-G12D",
+            "chrom":"chr12",
+            "pos":25398284,
+            "ref":"G",
+            "alt":"A",
+            "rate":0.75
+        },
+        {
+            "name":"PIK3CA-G1049A",
+            "chrom":"chr3",
+            "pos":178952091,
+            "ref":"G",
+            "alt":"C",
+            "rate":0.05
+        },
+        {
+            "name":"PTEN-K128N",
+            "chrom":"chr10",
+            "pos":89692900,
+            "ref":"G",
+            "alt":"T",
+            "rate":0.1
         }
     ]
 }

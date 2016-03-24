@@ -15,6 +15,9 @@ include("sequencing.jl")
 include("maker.jl")
 
 # test
-make_seq("data/panels/lung_cancer_hg19.bed", "data/profiles/fusion.json", "output")
+export seqtest
+function seqtest(outdir="output")
+    make_seq("data/panels/lung_cancer_hg19.bed", "data/profiles/fusion.json", outdir)
+end
 
 end # module
