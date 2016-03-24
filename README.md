@@ -1,7 +1,19 @@
-# SeqMaker (under development)
+# SeqMaker
+Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38)
 
-[![Build Status](https://travis-ci.org/sfchen/SeqMaker.jl.svg?branch=master)](https://travis-ci.org/sfchen/SeqMaker.jl)
+# Features
+* support sequencing error simulation
+* support SNV simulation
+* support dbSNP (in dev)
+* support fusion (in dev)
 
-[![Coverage Status](https://coveralls.io/repos/sfchen/SeqMaker.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/sfchen/SeqMaker.jl?branch=master)
+# Usage
+```julia
+# clone SeqMaker first
+Pkg.clone("https://github.com/sfchen/SeqMaker.jl.git")
 
-[![codecov.io](http://codecov.io/github/sfchen/SeqMaker.jl/coverage.svg?branch=master)](http://codecov.io/github/sfchen/SeqMaker.jl?branch=master)
+using SeqMaker
+
+# it will download human genome assembly data automatically
+seqtest("foldername")
+```
