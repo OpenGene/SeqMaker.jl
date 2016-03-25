@@ -10,7 +10,7 @@ Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38)
 # Examples
 ```julia
 # clone SeqMaker first
-Pkg.clone("https://github.com/sfchen/SeqMaker.jl.git")
+Pkg.clone("https://github.com/OpenGene/SeqMaker.jl.git")
 
 using SeqMaker
 
