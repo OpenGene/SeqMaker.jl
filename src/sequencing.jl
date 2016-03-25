@@ -1,6 +1,6 @@
-const SNV_SUBSTITUTION = 0.6
-const SNV_INSERTION = 0.2
-const SNV_DELETION = 0.2
+const SNV_SUBSTITUTION = 0.9
+const SNV_INSERTION = 0.05
+const SNV_DELETION = 0.05
 
 # simulate the sequencing process based on the config
 # return a fastq pair
