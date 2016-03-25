@@ -1,4 +1,4 @@
-function make_seq(panel_file::AbstractString, profile_file::AbstractString, output_folder::AbstractString = ".")
+function make_seq(panel_file::AbstractString, profile_file::AbstractString, output_folder::AbstractString, depth)
     profile = JSON.parsefile(profile_file)
     panel, panel_size = load_bed(panel_file)
     if !isdir(output_folder)
@@ -6,6 +6,10 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
     end
 
     config = profile["config"]
+
+    if depth<=0
+        depth = config["depth"]
+    end
 
     io = nothing
     filename = joinpath(output_folder, "SEQMAKER-$SEQMAKER_VERSION")
@@ -24,7 +28,7 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
     temp_max = config["template_len"]["max"]
     temp_min = config["template_len"]["min"]
     temp_len_mean = ( temp_min + temp_max )/2
-    read_num = (config["depth"] * panel_size) / temp_len_mean
+    read_num = (depth * panel_size) / temp_len_mean
     read_num = Int(floor(read_num))
     rand_pos = rand(read_num)
     rand_temp_len = rand(read_num)
