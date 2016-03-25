@@ -7,16 +7,7 @@ Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38)
 * support dbSNP (in dev)
 * support fusion (in dev)
 
-# Panel
-* A file describes the regions of your target capturing
-* In bed format, each line is a record
-* If you don't do capturing, you can use a whole genome panel
-
-# Profile
-* A file describes the sequencing simulation config and the mutation to simulate
-* In json format
-
-# Usage
+# Examples
 ```julia
 # clone SeqMaker first
 Pkg.clone("https://github.com/sfchen/SeqMaker.jl.git")
@@ -50,4 +41,81 @@ ngs("myout", "panelfile.bed", "profile.json")
 
 # set all parameters
 ngs("myout", "panelfile.bed", "profile.json", depth=100)
+```
+
+# Panel
+* A file describes the regions of your target capturing
+* In bed format, each line is a record
+* If you don't do capturing, you can use a whole genome panel
+
+```tsv
+chr9    133588266   133763062   ABL1
+chr14   105235686   105262088   AKT1
+chr19   40736224    40791443    AKT2
+chr2    29415640    30144432    ALK
+chrX    66764465    66950461    AR
+chr11   108093211   108239829   ATM
+chr3    142168077   142297668   ATR
+chr2    111876955   111926024   BCL2L11
+chr7    140419127   140624564   BRAF
+chr17   41196312    41277500    BRCA1
+chr13   32889611    32973805    BRCA2
+chr11   69455855    69469242    CCND1
+chr12   58141510    58149796    CDK4
+chr7    92234235    92465908    CDK6
+chr5    149432854   149492935   CSF1R
+chr1    162601163   162757190   DDR2
+```
+
+# Profile
+* A file describes the sequencing simulation config and the mutation to simulate
+* In json format
+
+```json
+{
+    "config":{
+        "depth":300,
+        "pair-end":true,
+        "readlen":151,
+        "assembly":"hg19",
+        "seq_error_rate":0.001,
+        "template_len":{
+            "min":140,
+            "max":200
+        },
+        "normal_base_qual":{
+            "min":30,
+            "max":37
+        },
+        "seq_error_qual":{
+            "min":8,
+            "max":20
+        }
+    },
+    "fusion":[
+        {
+            "name":"ALK-intron19-EML4-intron13",
+            "left":"-2:29447873",
+            "right":"+2:42526793",
+            "rate":0.1
+        }
+    ],
+    "snv":[
+        {
+            "name":"EGFR-L861Q",
+            "chrom":"chr7",
+            "pos":55259524,
+            "ref":"T",
+            "alt":"A",
+            "rate":0.2
+        },
+        {
+            "name":"KRAS-G12D",
+            "chrom":"chr12",
+            "pos":25398284,
+            "ref":"G",
+            "alt":"A",
+            "rate":0.75
+        }
+}
 ```
