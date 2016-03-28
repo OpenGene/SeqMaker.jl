@@ -95,8 +95,18 @@ chr1    162601163   162757190   DDR2
     "fusion":[
         {
             "name":"ALK-intron19-EML4-intron13",
-            "left":"-2:29447873",
-            "right":"+2:42526793",
+            "left":
+            {
+                "chrom":"chr2",
+                "strand":"-",
+                "pos":29447873
+            },
+            "right":
+            {
+                "chrom":"chr2",
+                "strand":"+",
+                "pos":42526793
+            },
             "rate":0.1
         }
     ],
