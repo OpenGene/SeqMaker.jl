@@ -11,6 +11,7 @@ const SEQMAKER_VERSION = "V1"
 include("panel.jl")
 include("sample.jl")
 include("snv.jl")
+include("fusion.jl")
 include("sequencing.jl")
 include("maker.jl")
 
