@@ -20,7 +20,7 @@
     },
     "fusion":[
         {
-            "name":"ALK-intron19-EML4-intron13",
+            "name":"ALK-EML4",
             "left":
             {
                 "chrom":"chr2",
@@ -31,7 +31,23 @@
             {
                 "chrom":"chr2",
                 "strand":"+",
-                "pos":42526793
+                "pos":42426793
+            },
+            "rate":1.0
+        },
+        {
+            "name":"ALK-EML4",
+            "left":
+            {
+                "chrom":"chr2",
+                "strand":"-",
+                "pos":29449873
+            },
+            "right":
+            {
+                "chrom":"chr2",
+                "strand":"+",
+                "pos":42428793
             },
             "rate":1.0
         }
