@@ -6,8 +6,8 @@
         "assembly":"hg19",
         "seq_error_rate":0.001,
         "template_len":{
-            "min":140,
-            "max":200
+            "min":150,
+            "max":230
         },
         "normal_base_qual":{
             "min":30,
@@ -33,7 +33,7 @@
                 "strand":"+",
                 "pos":42526793
             },
-            "rate":0.1
+            "rate":1.0
         }
     ],
     "snv":[
