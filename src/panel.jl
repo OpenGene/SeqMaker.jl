@@ -8,14 +8,17 @@ function load_bed(bed_file::AbstractString)
     for line in lines
         line = rstrip(line, '\n')
         cols = split(line)
-        if length(cols)<4
+        if length(cols)<3
             continue
         end
         chr = ASCIIString(cols[1])
         from = parse(Int64, ASCIIString(cols[2]))
         to = parse(Int64, ASCIIString(cols[3]))
         len = abs(to - from) + 1
-        contig_name = ASCIIString(cols[4])
+        contig_name = "unknown"
+        if length(cols)>=4
+            contig_name = ASCIIString(cols[4])
+        end
         panel_size = start_in_panel+len-1
         rec = Dict(
             "chr"=>chr,
