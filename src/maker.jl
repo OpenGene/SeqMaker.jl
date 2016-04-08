@@ -1,11 +1,14 @@
 function make_seq(panel_file::AbstractString, profile_file::AbstractString, output_folder::AbstractString, depth)
     profile = JSON.parsefile(profile_file)
-    panel, panel_size = load_bed(panel_file)
+    config = profile["config"]
+
+    # load assembly
+    assembly = load_assembly(config["assembly"])
+    panel, panel_size = load_bed(panel_file, assembly)
+
     if !isdir(output_folder)
         mkpath(output_folder)
     end
-
-    config = profile["config"]
 
     if depth<=0
         depth = config["depth"]
@@ -21,9 +24,6 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
     else
         io = fastq_open("$filename.R1.fq", "w")
     end
-
-    # load assembly
-    assembly = load_assembly(config["assembly"])
 
     temp_max = config["template_len"]["max"]
     temp_min = config["template_len"]["min"]

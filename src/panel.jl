@@ -1,4 +1,4 @@
-function load_bed(bed_file::AbstractString)
+function load_bed(bed_file::AbstractString, assembly)
     io = open(bed_file)
     bed_file = readall(io)
     lines = split(bed_file, '\n')
@@ -12,8 +12,22 @@ function load_bed(bed_file::AbstractString)
             continue
         end
         chr = ASCIIString(cols[1])
+        if !haskey(assembly, chr)
+            warn("$chr is not in assembly")
+            continue
+        end
+        chrlen = length(assembly[chr])
         from = parse(Int64, ASCIIString(cols[2]))
         to = parse(Int64, ASCIIString(cols[3]))
+
+        # extend from/to by 50*2 bp
+        from += sign(from - to) * 50
+        to += sign(to - from) * 50
+
+        # clamp from 1 ~ chromo length
+        from = max(1, min(chrlen, from))
+        to = max(1, min(chrlen, to))
+
         len = abs(to - from) + 1
         contig_name = "unknown"
         if length(cols)>=4
