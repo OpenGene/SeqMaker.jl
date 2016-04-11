@@ -17,7 +17,8 @@ include("maker.jl")
 
 # test
 export ngs,
-    alk
+    alk,
+    wgs
 
 function ngs(outdir="output", panel_file="", profile_file=""; depth=0)
     if panel_file==""
@@ -31,6 +32,10 @@ end
 
 function alk(profile_file=""; depth=50)
     return ngs("alk", joinpath(Pkg.dir("SeqMaker"), "data/panels/alk.bed"), profile_file, depth=depth)
+end
+
+function wgs(outdir="wgs", profile_file=""; depth=30)
+    return ngs(outdir, joinpath(Pkg.dir("SeqMaker"), "data/panels/hg19_whole_genome.bed"), profile_file, depth=depth)
 end
 
 end # module
