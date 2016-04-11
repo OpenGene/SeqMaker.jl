@@ -41,6 +41,9 @@ ngs("myout", "panelfile.bed", "profile.json")
 
 # set all parameters
 ngs("myout", "panelfile.bed", "profile.json", depth=100)
+
+# simulate whole genome sequencing with a depth of 10x
+wgs("myout",  depth=10)
 ```
 
 # Panel
