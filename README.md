@@ -1,5 +1,5 @@
 # SeqMaker
-Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38)
+Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), with Julia language
 
 # Features
 * support sequencing error simulation
@@ -9,6 +9,8 @@ Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38)
 
 # Examples
 ```julia
+# launch Julia
+
 # clone SeqMaker first
 Pkg.clone("https://github.com/OpenGene/SeqMaker.jl.git")
 
