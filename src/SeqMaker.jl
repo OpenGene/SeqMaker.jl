@@ -29,8 +29,8 @@ function ngs(outdir="output", panel_file="", profile_file=""; depth=0)
     make_seq(panel_file, profile_file, outdir, depth)
 end
 
-function alk(profile_file=""; d=50)
-    return ngs("alk", joinpath(Pkg.dir("SeqMaker"), "data/panels/alk.bed"), profile_file, depth=d)
+function alk(profile_file=""; depth=50)
+    return ngs("alk", joinpath(Pkg.dir("SeqMaker"), "data/panels/alk.bed"), profile_file, depth=depth)
 end
 
 end # module
