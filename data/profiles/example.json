@@ -41,6 +41,22 @@
             {
                 "chrom":"chr2",
                 "strand":"-",
+                "pos":29448873
+            },
+            "right":
+            {
+                "chrom":"chr2",
+                "strand":"+",
+                "pos":42427793
+            },
+            "rate":1.0
+        },
+        {
+            "name":"ALK-EML4",
+            "left":
+            {
+                "chrom":"chr2",
+                "strand":"-",
                 "pos":29449873
             },
             "right":
