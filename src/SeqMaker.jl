@@ -31,6 +31,9 @@ function ngs(outdir="output", panel_file="", profile_file=""; depth=0)
 end
 
 function alk(profile_file=""; depth=50)
+    if profile_file==""
+        profile_file = joinpath(Pkg.dir("SeqMaker"), "data/profiles/fusion.json")
+    end
     return ngs("alk", joinpath(Pkg.dir("SeqMaker"), "data/panels/alk.bed"), profile_file, depth=depth)
 end
 
