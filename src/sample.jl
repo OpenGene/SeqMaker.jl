@@ -4,6 +4,6 @@ function sample(assembly, chr, pos, temp_len)
         error("The chosen assembly doesn't have $chr")
     end
     start = min(start, length(assembly[chr]) - temp_len)
-    seq = assembly[chr].sequence[start:start+temp_len-1]
-    return seq, start
+    seq = uppercase(assembly[chr].sequence.seq[start:start+temp_len-1])
+    return dna(seq), start
 end

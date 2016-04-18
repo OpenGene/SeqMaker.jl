@@ -25,13 +25,13 @@
             {
                 "chrom":"chr2",
                 "strand":"-",
-                "pos":29447873
+                "pos":29448873
             },
             "right":
             {
                 "chrom":"chr2",
                 "strand":"+",
-                "pos":42426793
+                "pos":42427793
             },
             "rate":1.0
         }
