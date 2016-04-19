@@ -1,5 +1,6 @@
 # SeqMaker
-Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), written in [Julia](http://julialang.org/) language
+Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), written in [Julia](http://julialang.org/) language  
+This tool can be used to test or benchmark bioinformatics algorithms, software or pipelines
 
 # Features
 * support sequencing error simulation
