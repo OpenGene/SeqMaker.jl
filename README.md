@@ -1,11 +1,16 @@
 # SeqMaker
-Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), with Julia language
+Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), written in [Julia](http://julialang.org/) language
 
 # Features
 * support sequencing error simulation
 * support SNV simulation
+* support fusion
 * support dbSNP (in dev)
-* support fusion (in dev)
+* support CNV (in dev)
+
+## Julia
+Julia is a fresh programming language with `C/C++` like performance and `Python` like simple usage  
+On Ubuntu, you can install Julia by `sudo apt-get install julia`, and type `julia` to open Julia interactive prompt
 
 # Examples
 ```julia
