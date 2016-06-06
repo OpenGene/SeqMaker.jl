@@ -1,6 +1,12 @@
 function load_bed(bed_file::AbstractString, assembly)
     io = open(bed_file)
-    bed_file = readall(io)
+    bed_file = ""
+    # TODO: work around for readall missing in master
+    if isdefined(Base, :readstring)
+        bed_file = readstring(io)
+    else
+        bed_file = readall(io)
+    end
     lines = split(bed_file, '\n')
     panel = []
     start_in_panel = 1

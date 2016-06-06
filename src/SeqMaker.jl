@@ -8,6 +8,7 @@ const SEQMAKER_VERSION = "V1"
 
 # package code goes here
 
+include("compat.jl")
 include("panel.jl")
 include("sample.jl")
 include("snv.jl")
