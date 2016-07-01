@@ -16,7 +16,7 @@ function mutate(seqstr, start, snv)
     end
     offset = snv["pos"] - start
     left = seqstr[1:offset]
-    center = snv["alt"]
+    center = ASCIIString(snv["alt"])
     right = seqstr[offset+length(snv["ref"])+1:end]
     seqstr = left * center * right
     return seqstr
