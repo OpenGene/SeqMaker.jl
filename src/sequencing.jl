@@ -7,18 +7,41 @@ const SNV_DELETION = 0.05
 function pair_end_seq(dna_template, config)
     r1seq, r1qual = sequence_simulation(dna_template, config)
     r2seq, r2qual = sequence_simulation(~dna_template, config)
-    r1name, r2name = name_simulation(true)
+    random_index1 = false
+    random_index2 = false
+    if haskey(config, "random_index1")
+        random_index1 = config["random_index1"]
+    end
+    if haskey(config, "random_index2")
+        random_index2 = config["random_index2"]
+    end
+    r1name, r2name = name_simulation(true, random_index1, random_index2)
     read1 = FastqRead(r1name, r1seq, "+", r1qual)
     read2 = FastqRead(r2name, r2seq, "+", r2qual)
     pair = FastqPair(read1, read2)
     return pair
 end
 
-function name_simulation(pairend)
+function random_index(index_len = 8)
+    atcg = ['A', 'T', 'C', 'G']
+    rnd = round(rand(index_len) * 3) + 1
+    arr = [atcg[Int(rnd[i])] for i in 1:index_len]
+    return join(arr)
+end
+
+function name_simulation(pairend = true, random_index1 = false, random_index2 = false)
     const device = "SEQMAKER"
     const run = 1
     const chip = SEQMAKER_VERSION
-    const barcode = "ATCGATCG"
+    const fixed_index = "ATCGATCG"
+    index1 = fixed_index
+    index2 = fixed_index
+    if random_index1
+        index1 = random_index()
+    end
+    if random_index2
+        index2 = random_index()
+    end
     lane = Int(round(rand() * 3)) + 1
     tile = Int(round(rand() * 99)) + 1
     x = Int(round(rand() * 9999)) + 1
@@ -26,9 +49,9 @@ function name_simulation(pairend)
 
     firstpart = "@$device:$run:$chip:$lane:$tile:$x:$y"
     if pairend
-        return "$firstpart 1:N:0:$barcode", "$firstpart 2:N:0:$barcode"
+        return "$firstpart 1:N:0:$index1", "$firstpart 2:N:0:$index2"
     else
-        return "$firstpart 1:N:0:$barcode"
+        return "$firstpart 1:N:0:$index1"
     end
 end
 
