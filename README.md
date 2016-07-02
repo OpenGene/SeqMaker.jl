@@ -11,7 +11,9 @@ This tool can be used to test or benchmark bioinformatics algorithms, software o
 # Features
 * support sequencing error simulation
 * support SNV simulation
-* support fusion
+* support fusion simulation
+* support duplication simulation
+* support single molecule indexing
 * support dbSNP (in dev)
 * support CNV (in dev)
 
@@ -96,6 +98,9 @@ chr1    162601163   162757190   DDR2
         "readlen":151,
         "assembly":"hg19",
         "seq_error_rate":0.001,
+        "duplication_rate":3.0,
+        "random_index1":false,
+        "random_index2":true,
         "template_len":{
             "min":140,
             "max":200
