@@ -1,6 +1,7 @@
 function make_seq(panel_file::AbstractString, profile_file::AbstractString, output_folder::AbstractString, depth)
     profile = JSON.parsefile(profile_file)
     config = profile["config"]
+    fill_default_config!(config)
 
     # load assembly
     assembly = load_assembly(config["assembly"])
@@ -28,7 +29,7 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
     temp_max = config["template_len"]["max"]
     temp_min = config["template_len"]["min"]
     temp_len_mean = ( temp_min + temp_max )/2
-    read_num = (depth * panel_size) / temp_len_mean
+    read_num = (depth * panel_size) / (temp_len_mean * config["duplication_rate"])
     read_num = Int(floor(read_num))
     rand_pos = rand(read_num)
     rand_temp_len = rand(read_num)
@@ -45,8 +46,10 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
             seq = ~seq
         end
         if config["pair-end"]
-            pair = pair_end_seq(seq, config)
-            fastq_write_pair(io, pair)
+            reads = pair_end_seq(seq, config)
+            for pair in reads
+                fastq_write_pair(io, pair)
+            end
         end
     end
     close(io)
@@ -76,4 +79,16 @@ function seek_in_panel(panel, panel_pos)
     offset = panel_pos - rec["start_in_panel"]
     pos_in_chr = rec["from"] + offset
     return rec["chr"], pos_in_chr
+end
+
+function fill_default_config!(config)
+    if !haskey(config, "duplication_rate")
+        config["duplication_rate"] = 1.0
+    end
+    if !haskey(config, "random_index1")
+        config["random_index1"] = false
+    end
+    if !haskey(config, "random_index2")
+        config["random_index2"] = false
+    end
 end

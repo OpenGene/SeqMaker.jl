@@ -5,21 +5,28 @@ const SNV_DELETION = 0.05
 # simulate the sequencing process based on the config
 # return a fastq pair
 function pair_end_seq(dna_template, config)
-    r1seq, r1qual = sequence_simulation(dna_template, config)
-    r2seq, r2qual = sequence_simulation(~dna_template, config)
-    random_index1 = false
-    random_index2 = false
-    if haskey(config, "random_index1")
-        random_index1 = config["random_index1"]
+    const fixed_index = "ATCGATCG"
+    index1 = fixed_index
+    index2 = fixed_index
+    if config["random_index1"]
+        index1 = random_index()
     end
-    if haskey(config, "random_index2")
-        random_index2 = config["random_index2"]
+    if config["random_index2"]
+        index2 = random_index()
     end
-    r1name, r2name = name_simulation(true, random_index1, random_index2)
-    read1 = FastqRead(r1name, r1seq, "+", r1qual)
-    read2 = FastqRead(r2name, r2seq, "+", r2qual)
-    pair = FastqPair(read1, read2)
-    return pair
+    # simulate the duplication rate
+    read_num = Int(round((rand() * config["duplication_rate"])/0.5))
+    reads = []
+    for i in 1:read_num
+        r1seq, r1qual = sequence_simulation(dna_template, config)
+        r2seq, r2qual = sequence_simulation(~dna_template, config)
+        r1name, r2name = name_simulation(true, index1, index2)
+        read1 = FastqRead(r1name, r1seq, "+", r1qual)
+        read2 = FastqRead(r2name, r2seq, "+", r2qual)
+        pair = FastqPair(read1, read2)
+        push!(reads, pair)
+    end
+    return reads
 end
 
 function random_index(index_len = 8)
@@ -29,19 +36,10 @@ function random_index(index_len = 8)
     return join(arr)
 end
 
-function name_simulation(pairend = true, random_index1 = false, random_index2 = false)
+function name_simulation(pairend, index1, index2)
     const device = "SEQMAKER"
     const run = 1
     const chip = SEQMAKER_VERSION
-    const fixed_index = "ATCGATCG"
-    index1 = fixed_index
-    index2 = fixed_index
-    if random_index1
-        index1 = random_index()
-    end
-    if random_index2
-        index2 = random_index()
-    end
     lane = Int(round(rand() * 3)) + 1
     tile = Int(round(rand() * 99)) + 1
     x = Int(round(rand() * 9999)) + 1
