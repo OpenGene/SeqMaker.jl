@@ -49,8 +49,8 @@ function make_fusion_seq(l, r, fusion_left, fusion_right, assembly)
     end
     # connect left/right seq to a fusion seq
     fusion_seq = dna(uppercase(leftseq.seq * rightseq.seq))
-    println(">fusion_left:", l, "_right:", r)
-    println(fusion_seq.seq)
+    # println(">fusion_left:", l, "_right:", r)
+    # println(fusion_seq.seq)
     return fusion_seq
 end
 
