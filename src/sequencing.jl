@@ -4,7 +4,7 @@ const SNV_DELETION = 0.05
 
 # simulate the sequencing process based on the config
 # return a fastq pair
-function pair_end_seq(dna_template, config, copy_num = 1.0)
+function pair_end_seq(dna_template, config)
     const fixed_index = "ATCGATCG"
     index1 = fixed_index
     index2 = fixed_index
@@ -15,7 +15,7 @@ function pair_end_seq(dna_template, config, copy_num = 1.0)
         index2 = random_index()
     end
     # simulate the duplication rate
-    read_num = Int(copy_num * round((rand() * config["duplication_rate"])/0.5))
+    read_num = Int(round((rand() * config["duplication_rate"])/0.5))
     reads = []
     for i in 1:read_num
         r1seq, r1qual = sequence_simulation(dna_template, config)

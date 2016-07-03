@@ -38,21 +38,25 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         # linear interpolation
         temp_len = Int(floor(rand_temp_len[i] * temp_min + (1.0-rand_temp_len[i]) * temp_max))
         chr, pos_in_chr = seek_in_panel(panel, panel_pos)
-        seq, start = sample(assembly, chr, pos_in_chr, temp_len)
-        seq = simulate_snv(seq, chr, start, profile["snv"])
-        seq = simulate_fusion(seq, chr, start, profile["fusion"], assembly)
-        copy_num = 1.0
+        original_seq, start = sample(assembly, chr, pos_in_chr, temp_len)
+
+        cycles = 1
         if haskey(profile, "cnv")
-            copy_num = simulate_copy_number(chr, start, length(seq), profile["cnv"])
+            copy_num = simulate_copy_number(chr, start, length(original_seq), profile["cnv"])
+            cycles = Int(round((rand() * copy_num)/0.5))
         end
-        # simulate watson/crick strand
-        if rand()> 0.5
-            seq = ~seq
-        end
-        if config["pair-end"]
-            reads = pair_end_seq(seq, config, copy_num)
-            for pair in reads
-                fastq_write_pair(io, pair)
+        for i in 1:cycles
+            seq = simulate_snv(original_seq, chr, start, profile["snv"])
+            seq = simulate_fusion(seq, chr, start, profile["fusion"], assembly)
+            # simulate watson/crick strand
+            if rand()> 0.5
+                seq = ~seq
+            end
+            if config["pair-end"]
+                reads = pair_end_seq(seq, config)
+                for pair in reads
+                    fastq_write_pair(io, pair)
+                end
             end
         end
     end
