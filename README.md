@@ -14,8 +14,7 @@ This tool can be used to test or benchmark bioinformatics algorithms, software o
 * support fusion simulation
 * support duplication simulation
 * support single molecule indexing
-* support dbSNP (in dev)
-* support CNV (in dev)
+* support CNV
 
 ## Julia
 Julia is a fresh programming language with `C/C++` like performance and `Python` like simple usage  
