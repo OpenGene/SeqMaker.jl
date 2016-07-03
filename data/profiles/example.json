@@ -104,5 +104,14 @@
             "alt":"T",
             "rate":0.1
         }
+    ],
+    "cnv":[
+        {
+            "name":"MET-Amplification",
+            "chrom":"chr7",
+            "start":116312406,
+            "end":116438440,
+            "copy":3.0
+        }
     ]
 }
