@@ -1,9 +1,8 @@
-function simulate_copy_number(chr, start, seqlen, cnv_list)
+function simulate_copy_number(chr, pos_in_chr, cnv_list)
     for cnv in cnv_list
         if chr == cnv["chrom"]
             # check if it is intersect
-            overlap = intersect(cnv["start"]:cnv["end"], start:start+seqlen)
-            if length(overlap) > seqlen / 3
+            if cnv["start"] < pos_in_chr < cnv["end"]
                 return cnv["copy"]
             end
         end

@@ -38,14 +38,17 @@ function make_seq(panel_file::AbstractString, profile_file::AbstractString, outp
         # linear interpolation
         temp_len = Int(floor(rand_temp_len[i] * temp_min + (1.0-rand_temp_len[i]) * temp_max))
         chr, pos_in_chr = seek_in_panel(panel, panel_pos)
-        original_seq, start = sample(assembly, chr, pos_in_chr, temp_len)
-
         cycles = 1
         if haskey(profile, "cnv")
-            copy_num = simulate_copy_number(chr, start, length(original_seq), profile["cnv"])
+            copy_num = simulate_copy_number(chr, pos_in_chr, profile["cnv"])
             cycles = Int(round((rand() * copy_num)/0.5))
         end
-        for i in 1:cycles
+        for c in 1:cycles
+            # vibration
+            this_pos_in_chr = pos_in_chr + Int(round((rand() - 0.5) * 0.4 * temp_len))
+            this_temp_len = temp_len + Int(round((rand() - 0.5) * 0.1 * temp_len))
+            # sampling
+            original_seq, start = sample(assembly, chr, this_pos_in_chr , this_temp_len)
             seq = simulate_snv(original_seq, chr, start, profile["snv"])
             seq = simulate_fusion(seq, chr, start, profile["fusion"], assembly)
             # simulate watson/crick strand
