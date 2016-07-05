@@ -148,6 +148,15 @@ chr1    162601163   162757190   DDR2
             "alt":"A",
             "rate":0.75
         }
+    ],
+    "cnv":[
+        {
+            "name":"MET-Amplification",
+            "chrom":"chr7",
+            "start":116312406,
+            "end":116438440,
+            "copy":3.0
+        }
     ]
 }
 ```
