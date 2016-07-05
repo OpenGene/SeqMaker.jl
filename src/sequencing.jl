@@ -56,19 +56,58 @@ end
 function sequence_simulation(dna_template, config)
     seq_arr = Char[ nt for nt in dna_template.seq]
     readlen = min(length(dna_template), config["readlen"])
+
+    # simulate quality raise (by coordination) and quality drop
+    const qual_curve = [0.95, 1.06, 1.14, 1.19, 1.18,
+        1.176, 1.173, 1.172, 1.172, 1.170,
+        1.168, 1.165, 1.163,
+        1.159, 1.158, 1.153,
+        1.148, 1.144, 1.143,
+        1.137, 1.133,
+        1.127, 1.128, 1.120,
+        1.116, 1.112,
+        1.105,
+        1.096, 1.097, 1.093,
+        1.087, 1.083, 1.081,
+        1.079, 1.075, 1.073,
+        1.066, 1.063,
+        1.054, 1.051,
+        1.046,
+        1.038, 1.03, 1.021, 1.01, 1.02, 1.0]
+    # simulate last base with low quality
+    const qual_last_base = 0.9
+    qual_adjust_ratio = [0.0 for i in 1:readlen]
+    # interpolation with qual_curve
+    for i in 1:readlen
+        if i == readlen
+            qual_adjust_ratio[i] = qual_last_base
+            continue
+        end
+        curve_len = length(qual_curve)
+        pos = curve_len*i/readlen
+        p = pos - floor(pos)
+        left = min(curve_len, Int(floor(pos)) + 1)
+        right = min(curve_len, left + 1)
+        # linear interpolation
+        qual_adjust_ratio[i] = qual_curve[left] * (1-p) + qual_curve[right] * p
+    end
+
     rand_err = rand(readlen)
     has_error = false
-    for e in rand_err
-        if e < config["seq_error_rate"]
+    for i in 1:readlen
+        if rand_err[i] < config["seq_error_rate"] / qual_adjust_ratio[i]
             has_error = true
             break
         end
     end
+
     rand_qual = rand(readlen)
     min_qual = config["normal_base_qual"]["min"]
     max_qual = config["normal_base_qual"]["max"]
-    quals = round(rand_qual * min_qual + (1.0 - rand_qual) * max_qual)
-    qual_arr = [Char(Int(q)+33) for q in quals]
+    quals = rand_qual * min_qual + (1.0 - rand_qual) * max_qual
+    # adjust the quality and make phred qual string
+    qual_arr = [Char(Int( round(quals[i] * qual_adjust_ratio[i]) )+33) for i in 1:readlen]
+
     if !has_error
         sequence = Sequence(ASCIIString(seq_arr[1:readlen]))
         quality = Quality(ASCIIString(qual_arr))
