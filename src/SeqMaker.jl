@@ -24,23 +24,23 @@ export ngs,
 
 function ngs(outdir="output", panel_file="", profile_file=""; depth=0)
     if panel_file==""
-        panel_file = joinpath(Pkg.dir("SeqMaker"), "data/panels/lung_cancer_hg19.bed")
+        panel_file = joinpath(dirname(@__FILE__), "../data/panels/lung_cancer_hg19.bed")
     end
     if profile_file==""
-        profile_file = joinpath(Pkg.dir("SeqMaker"), "data/profiles/example.json")
+        profile_file = joinpath(dirname(@__FILE__), "../data/profiles/example.json")
     end
     make_seq(panel_file, profile_file, outdir, depth)
 end
 
 function alk(profile_file=""; depth=50)
     if profile_file==""
-        profile_file = joinpath(Pkg.dir("SeqMaker"), "data/profiles/fusion.json")
+        profile_file = joinpath(dirname(@__FILE__), "../data/profiles/fusion.json")
     end
-    return ngs("alk", joinpath(Pkg.dir("SeqMaker"), "data/panels/alk.bed"), profile_file, depth=depth)
+    return ngs("alk", joinpath(dirname(@__FILE__), "../data/panels/alk.bed"), profile_file, depth=depth)
 end
 
 function wgs(outdir="wgs", profile_file=""; depth=30)
-    return ngs(outdir, joinpath(Pkg.dir("SeqMaker"), "data/panels/hg19_whole_genome.bed"), profile_file, depth=depth)
+    return ngs(outdir, joinpath(dirname(@__FILE__), "../data/panels/hg19_whole_genome.bed"), profile_file, depth=depth)
 end
 
 end # module
