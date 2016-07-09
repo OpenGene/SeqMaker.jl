@@ -1,6 +1,7 @@
 const SNV_SUBSTITUTION = 0.9
 const SNV_INSERTION = 0.05
 const SNV_DELETION = 0.05
+const per_base_qual_adjust = rand(5, 1000)
 
 # simulate the sequencing process based on the config
 # return a fastq pair
@@ -58,13 +59,13 @@ function sequence_simulation(dna_template, config)
     readlen = min(length(dna_template), config["readlen"])
 
     # simulate quality raise (by coordination) and quality drop
-    const qual_curve = [0.95, 1.06, 1.14, 1.19, 1.18,
+    const qual_curve = [0.95, 1.06, 1.14, 1.16, 1.168,
         1.176, 1.173, 1.172, 1.172, 1.170,
         1.168, 1.165, 1.163,
         1.159, 1.158, 1.153,
-        1.148, 1.144, 1.143,
+        1.148, 1.150, 1.143,
         1.137, 1.133,
-        1.127, 1.128, 1.120,
+        1.127, 1.130, 1.120,
         1.116, 1.112,
         1.105,
         1.096, 1.097, 1.093,
@@ -74,6 +75,7 @@ function sequence_simulation(dna_template, config)
         1.054, 1.051,
         1.046,
         1.038, 1.03, 1.021, 1.01, 1.02, 1.0]
+    const base_index = Dict('A'=>1, 'T'=>2, 'C'=>3, 'G'=>4, 'N'=>5)
     # simulate last base with low quality
     const qual_last_base = 0.9
     qual_adjust_ratio = [0.0 for i in 1:readlen]
@@ -106,7 +108,7 @@ function sequence_simulation(dna_template, config)
     max_qual = config["normal_base_qual"]["max"]
     quals = rand_qual * min_qual + (1.0 - rand_qual) * max_qual
     # adjust the quality and make phred qual string
-    qual_arr = [Char(Int( round(quals[i] * qual_adjust_ratio[i]) )+33) for i in 1:readlen]
+    qual_arr = [Char(Int( round(quals[i] * qual_adjust_ratio[i] * (per_base_qual_adjust[base_index[seq_arr[i]]]*0.1+0.95)) )+33) for i in 1:readlen]
 
     if !has_error
         sequence = Sequence(ASCIIString(seq_arr[1:readlen]))
