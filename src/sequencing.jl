@@ -108,7 +108,7 @@ function sequence_simulation(dna_template, config)
     max_qual = config["normal_base_qual"]["max"]
     quals = rand_qual * min_qual + (1.0 - rand_qual) * max_qual
     # adjust the quality and make phred qual string
-    qual_arr = [Char(Int( round(quals[i] * qual_adjust_ratio[i] * (per_base_qual_adjust[base_index[seq_arr[i]]]*0.1+0.95)) )+33) for i in 1:readlen]
+    qual_arr = [Char(Int( round(quals[i] * qual_adjust_ratio[i] * (per_base_qual_adjust[base_index[seq_arr[i]], i]*0.02+0.99) ) )+33) for i in 1:readlen]
 
     if !has_error
         sequence = Sequence(ASCIIString(seq_arr[1:readlen]))
