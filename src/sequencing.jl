@@ -1,6 +1,6 @@
-const SNV_SUBSTITUTION = 0.9
-const SNV_INSERTION = 0.05
-const SNV_DELETION = 0.05
+const SNV_SUBSTITUTION = 0.96
+const SNV_INSERTION = 0.02
+const SNV_DELETION = 0.02
 const per_base_qual_adjust = rand(5, 1000)
 
 # simulate the sequencing process based on the config
