@@ -102,4 +102,10 @@ function fill_default_config!(config)
     if !haskey(config, "random_index2")
         config["random_index2"] = false
     end
+    if !haskey(config, "read1_adapter")
+        config["read1_adapter"] = "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+    end
+    if !haskey(config, "read2_adapter")
+        config["read2_adapter"] = "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
+    end
 end

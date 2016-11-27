@@ -8,8 +8,10 @@
         "duplication_rate":3.0,
         "random_index1":false,
         "random_index2":true,
+        "read1_adapter":"AGATCGGAAGAGCACACGTCTGAACTCCAGTCA",
+        "read2_adapter":"AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT",
         "template_len":{
-            "min":150,
+            "min":130,
             "max":230
         },
         "normal_base_qual":{

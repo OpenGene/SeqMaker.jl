@@ -19,8 +19,8 @@ function pair_end_seq(dna_template, config)
     read_num = Int(round((rand() * config["duplication_rate"])/0.5))
     reads = []
     for i in 1:read_num
-        r1seq, r1qual = sequence_simulation(dna_template, config)
-        r2seq, r2qual = sequence_simulation(~dna_template, config)
+        r1seq, r1qual = sequence_simulation(dna(dna_template.seq * config["read1_adapter"]), config)
+        r2seq, r2qual = sequence_simulation(dna((~dna_template).seq * config["read2_adapter"]), config)
         r1name, r2name = name_simulation(true, index1, index2)
         read1 = FastqRead(r1name, r1seq, "+", r1qual)
         read2 = FastqRead(r2name, r2seq, "+", r2qual)
