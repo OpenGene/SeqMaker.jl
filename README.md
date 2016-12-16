@@ -100,9 +100,11 @@ chr1    162601163   162757190   DDR2
         "duplication_rate":3.0,
         "random_index1":false,
         "random_index2":true,
+        "read1_adapter":"AGATCGGAAGAGCACACGTCTGAACTCCAGTCA",
+        "read2_adapter":"AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT",
         "template_len":{
-            "min":140,
-            "max":200
+            "min":130,
+            "max":230
         },
         "normal_base_qual":{
             "min":30,
