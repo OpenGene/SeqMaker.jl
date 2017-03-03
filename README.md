@@ -162,3 +162,9 @@ chr1    162601163   162757190   DDR2
     ]
 }
 ```
+
+# Cite SeqMaker
+If you use SeqMaker for your research, you can cite this tool as:
+```
+Chen, S., Han, Y., Guo, L., Hu, J., & Gu, J. (2016, December). SeqMaker: A next generation sequencing simulator with variations, sequencing errors and amplification bias integrated. In Bioinformatics and Biomedicine (BIBM), 2016 IEEE International Conference on (pp. 835-840). IEEE.
+```
