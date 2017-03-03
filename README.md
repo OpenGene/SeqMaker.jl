@@ -1,10 +1,5 @@
 # SeqMaker
 
-[![Build Status](https://travis-ci.org/OpenGene/SeqMaker.jl.svg?branch=master)](https://travis-ci.org/OpenGene/SeqMaker.jl)
-[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
-[![SeqMaker](http://pkg.julialang.org/badges/SeqMaker_0.4.svg)](http://pkg.julialang.org/?pkg=SeqMaker)
-[![SeqMaker](http://pkg.julialang.org/badges/SeqMaker_0.5.svg)](http://pkg.julialang.org/?pkg=SeqMaker)
-
 Generate simulated sequencing data based on Human Genome Assembly (hg19/hg38), written in [Julia](http://julialang.org/) language  
 This tool can be used to test or benchmark bioinformatics algorithms, software or pipelines
 
